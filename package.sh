@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -ex
 
 if [ -z "$KSP_PATH" ]; then
   KSP_PATH=~/Games/KSP_linux
@@ -14,7 +14,7 @@ LPATH="$KSP_PATH/KSP_Data/Managed"
 compile_ksp() {
   LIBNAME=$1
   shift
-  gmcs -r:"$LPATH/Assembly-CSharp.dll,$LPATH/UnityEngine.dll" -t:library "$@" -out:"$LIBNAME"
+  mcs -sdk:2 -r:"$LPATH/Assembly-CSharp.dll,$LPATH/UnityEngine.dll" -t:library "$@" -out:"$LIBNAME"
 }
 
 compile_ksp Misc/FPS.dll Misc/FPS.cs
